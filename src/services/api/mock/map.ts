@@ -1,0 +1,52 @@
+import type { MapProvinceItem, MapScatterItem } from '@/types/dashboard'
+
+// @mock 地图省份销售数据
+export const mapProvinces: MapProvinceItem[] = [
+  { name: '北京', value: 8923.5 },
+  { name: '天津', value: 4567.2 },
+  { name: '上海', value: 9786.3 },
+  { name: '重庆', value: 5678.9 },
+  { name: '河北', value: 3456.7 },
+  { name: '山西', value: 2345.6 },
+  { name: '辽宁', value: 4567.8 },
+  { name: '吉林', value: 2345.6 },
+  { name: '黑龙江', value: 3456.7 },
+  { name: '江苏', value: 8765.4 },
+  { name: '浙江', value: 9123.4 },
+  { name: '安徽', value: 4567.8 },
+  { name: '福建', value: 5678.9 },
+  { name: '江西', value: 3456.7 },
+  { name: '山东', value: 7892.3 },
+  { name: '河南', value: 5678.9 },
+  { name: '湖北', value: 6789.1 },
+  { name: '湖南', value: 4567.8 },
+  { name: '广东', value: 11234.5 },
+  { name: '广西', value: 3456.7 },
+  { name: '海南', value: 1234.5 },
+  { name: '四川', value: 6789.1 },
+  { name: '贵州', value: 2345.6 },
+  { name: '云南', value: 3456.7 },
+  { name: '西藏', value: 567.8 },
+  { name: '陕西', value: 4567.8 },
+  { name: '甘肃', value: 1234.5 },
+  { name: '青海', value: 789.2 },
+  { name: '宁夏', value: 678.9 },
+  { name: '新疆', value: 2345.6 },
+  { name: '台湾', value: 5678.9 },
+  { name: '香港', value: 6789.1 },
+  { name: '澳门', value: 1234.5 },
+]
+
+// @mock 地图飞线/散点城市数据
+export const mapScatters: MapScatterItem[] = [
+  { name: '北京', value: [116.46, 39.92], count: 8923 },
+  { name: '上海', value: [121.48, 31.22], count: 9786 },
+  { name: '广州', value: [113.23, 23.16], count: 7654 },
+  { name: '深圳', value: [114.07, 22.62], count: 8234 },
+  { name: '成都', value: [104.06, 30.67], count: 5678 },
+  { name: '杭州', value: [120.19, 30.26], count: 6789 },
+  { name: '武汉', value: [114.31, 30.52], count: 4567 },
+  { name: '南京', value: [118.78, 32.04], count: 3892 },
+  { name: '重庆', value: [106.54, 29.59], count: 4235 },
+  { name: '西安', value: [108.95, 34.27], count: 3124 },
+]
