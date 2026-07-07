@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed } from 'vue'
 import type { OrderItem } from '@/types/dashboard'
 
 const props = defineProps<{
@@ -7,30 +7,14 @@ const props = defineProps<{
 }>()
 
 const isPaused = ref(false)
-let timer: ReturnType<typeof setInterval> | null = null
-const scrollIndex = ref(0)
 
-function startScroll() {
-  timer = setInterval(() => {
-    if (!isPaused.value && props.data.length > 1) {
-      scrollIndex.value = (scrollIndex.value + 1) % props.data.length
-    }
-  }, 3000)
-}
+const doubledData = computed(() => [...props.data, ...props.data])
 
 function getStatusClass(status: string) {
   if (status === '已完成') return 'status-done'
   if (status === '配送中') return 'status-delivering'
   return 'status-pending'
 }
-
-onMounted(() => {
-  startScroll()
-})
-
-onUnmounted(() => {
-  if (timer) clearInterval(timer)
-})
 </script>
 
 <template>
@@ -46,18 +30,20 @@ onUnmounted(() => {
       <span class="col-time">时间</span>
       <span class="col-status">状态</span>
     </div>
-    <div class="table-body" :style="{ transform: `translateY(-${scrollIndex * 36}px)` }">
-      <div
-        v-for="(item, index) in data"
-        :key="item.id"
-        class="table-row"
-        :class="{ 'row-even': index % 2 === 1 }"
-      >
-        <span class="col-order">{{ item.orderNo.slice(-8) }}</span>
-        <span class="col-product">{{ item.product }}</span>
-        <span class="col-amount">¥{{ item.amount.toLocaleString() }}</span>
-        <span class="col-time">{{ item.time.slice(-8) }}</span>
-        <span class="col-status" :class="getStatusClass(item.status)">{{ item.status }}</span>
+    <div class="table-viewport">
+      <div class="table-body" :class="{ paused: isPaused }">
+        <div
+          v-for="(item, index) in doubledData"
+          :key="`${item.id}-${index}`"
+          class="table-row"
+          :class="{ 'row-even': index % 2 === 1 }"
+        >
+          <span class="col-order">{{ item.orderNo.slice(-8) }}</span>
+          <span class="col-product">{{ item.product }}</span>
+          <span class="col-amount">¥{{ item.amount.toLocaleString() }}</span>
+          <span class="col-time">{{ item.time.slice(-8) }}</span>
+          <span class="col-status" :class="getStatusClass(item.status)">{{ item.status }}</span>
+        </div>
       </div>
     </div>
   </div>
@@ -66,6 +52,9 @@ onUnmounted(() => {
 <style scoped lang="scss">
 .scroll-table {
   font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -75,10 +64,24 @@ onUnmounted(() => {
   color: $color-text-dim;
   font-size: 11px;
   border-bottom: 1px solid $border-color;
+  flex-shrink: 0;
+  background: rgba(16, 24, 48, 0.95);
+  z-index: 2;
+  position: relative;
+}
+
+.table-viewport {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
 }
 
 .table-body {
-  transition: transform 0.6s ease-in-out;
+  animation: scroll-vertical 60s linear infinite;
+}
+
+.table-body.paused {
+  animation-play-state: paused;
 }
 
 .table-row {
@@ -134,5 +137,14 @@ onUnmounted(() => {
 
 .status-pending {
   color: $color-warning;
+}
+
+@keyframes scroll-vertical {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
 }
 </style>

@@ -34,7 +34,7 @@ const { orders } = storeToRefs(store)
   background: $bg-panel;
   border: 1px solid $border-color;
   border-radius: 4px;
-  padding: 6px 12px;
+  padding: 4px 12px;
   overflow: hidden;
 }
 
@@ -42,7 +42,6 @@ const { orders } = storeToRefs(store)
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 4px;
 }
 
 .bottom-title {

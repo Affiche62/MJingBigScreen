@@ -49,7 +49,7 @@ onUnmounted(() => {
 .dashboard {
   width: 1920px;
   height: 1080px;
-  padding: 0 16px 16px;
+  padding: 0 16px 8px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -74,6 +74,5 @@ onUnmounted(() => {
 
 .bottom-panel {
   flex-shrink: 0;
-  height: 40px;
 }
 </style>
