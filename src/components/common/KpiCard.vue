@@ -60,6 +60,7 @@ const changeClass = () => {
   color: #fff;
   font-family: $font-title;
   white-space: nowrap;
+  transition: color 0.5s ease;
 }
 
 .kpi-change {

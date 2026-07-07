@@ -2,8 +2,11 @@ export interface KpiData {
   id: number
   title: string
   value: string
+  rawValue: number
+  prefix: string
+  suffix: string
+  decimals: number
   change: number
-  unit: string
   trend: 'up' | 'down'
   isPositive: boolean
 }

@@ -24,6 +24,7 @@ onMounted(async () => {
 
 onUnmounted(() => {
   if (pollTimer) clearInterval(pollTimer)
+  store.stopKpiFluctuation()
 })
 </script>
 
@@ -32,7 +33,7 @@ onUnmounted(() => {
     <TopHeader />
 
     <div class="kpi-row">
-      <KpiCard v-for="kpi in store.kpiList" :key="kpi.id" :data="kpi" />
+      <KpiCard v-for="kpi in store.displayKpiList" :key="kpi.id" :data="kpi" />
     </div>
 
     <div class="main-grid">
